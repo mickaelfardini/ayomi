@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ayomi Login</title>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link href="{% static 'css/style.css' %}" rel="stylesheet" media="screen">
+	
+	{% block css %}
+	{% endblock %}
+</head>
+<body>
+	{% if user.is_authenticated %}
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">
+					Ayomi
+				</a>
+			</div>
+		</div>
+	</nav>
+	{% endif %}
+	<div class="container">
+		{% block body %}
+		{% endblock %}
+	</div>
+
+	{% block javascript %}
+	{% endblock %}
+</body>
+</html>

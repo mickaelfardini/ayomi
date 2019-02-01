@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block body %}
+	<div id="profile_index" class="container pb-3">
+		<h1>Bonjour, {{user.username}}</h1>
+
+		<h3>Vos informations :</h3>
+		<p>Email: <span id="uEmail">{{ user.email }}</span></p>
+		<p>Nom: <span id="uLastname">{{ user.last_name }}</span></p>
+		<p>Prenom: <span id="uFirstname">{{ user.first_name }}</span></p>
+
+		<button data-toggle="modal" data-target="#emailModal" class="btn btn-success">Modifier mes informations</button>
+	</div>
+
+	<div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Modifier mes informations</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Cancel">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="updateEmail">
+					{% csrf_token %}
+					<div class="form-group">
+						<label for="email">Nouvel Email</label>
+						<input id="email" name="email" type="email" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label for="lastname">Nom</label>
+						<input id="lastname" name="lastname" type="text" class="form-control" value="{{user.last_name}}">
+					</div>
+					<div class="form-group">
+						<label for="firstname">Prenom</label>
+						<input id="firstname" name="firstname" type="text" class="form-control" value="{{user.first_name}}">
+					</div>
+					<div class="form-group">
+						<button class="btn btn-success" type="submit">Update</button>
+					</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+
+{% block javascript %}
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	{% load staticfiles %}
+	<script src="{% static 'js/script.js' %}"></script>
+{% endblock %}
